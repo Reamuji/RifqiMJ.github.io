@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        :root {
+            --navbar-height: 10vh;
+            --mainCol: #5a6aa3;
+            --mainColAnl: #43817f;
+            --secCol: #dae1f4ff;
+
+            --neuDarkCol: #10131f;
+            --neuLightCol: #fbfdff;
+            --scrollbar-width: 0px; /* Default value */
+            --content-width: 100vw; /* Default value */
+        }
+        body{
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            translate: y;
+        }
+        
+        .screen{
+            height: calc(100vh - var(--navbar-height));
+            width: var(--content-width);
+        }
+        .section{
+            width: var(--content-width);
+        }
+
+
+        .navbar{
+            height: var(--navbar-height);
+            width: var(--content-width);
+            position: fixed;
+            background-color:var(--neuLightCol);
+            z-index: 9;
+            display: flex;
+        }
+        .navbar.spacer{
+            position:unset;
+        }
+
+        .pageContent{
+            width: 100vw;
+            max-width: 100vh;
+            margin: 0 auto;
+            padding: 5vh 0;
+        }
+
+        .title.screen{
+            background-image: url("assets/title/BG tile.png");
+            background-repeat: repeat;
+        }
+
+        .content img{
+            display: block;
+            padding-top: 5vh;
+            margin-left: auto;
+            margin-right: auto;
+            max-height: 22.5vh;
+            width: 80vw;
+            object-fit: contain;
+        }
+
+        .slogan{
+            margin-bottom:5vh;
+            z-index: 2;
+            max-width: 95vw;
+        }
+        .subjudul{
+            font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
+            text-align: center;
+            color: var(--mainCol);
+            
+            font-size: 3vh;
+            margin: 0 2vw;
+            
+            z-index: 2;
+        }
+        svg.semicircle{
+            position: absolute;
+            bottom: 0;
+            width: 200vw;
+            height: min(50vw,50vh);
+            left: 50%;
+            transform: translate(-50%,0);
+            
+            z-index: 2;
+        }
+        .semicircle path{
+            fill: var(--mainCol);
+        }
+        img#twoPeople{
+            max-height: 45vh;
+            max-width: 100vw;
+            position: absolute;
+            bottom: 0;
+
+            left: 50%;
+            transform: translate(-50%,0);
+
+            z-index: 3;
+        }
+
+
+        .destinasi.section{
+            background-image: linear-gradient(var(--mainCol), var(--mainColAnl));
+            display: flex;
+            justify-content: center;
+            color:white;
+            
+        }
+        .sectionContent{
+            --padding:50px;
+            width: min(90vw,90vh);
+            padding:var(--padding);
+            padding-right: calc(var(--padding) + 35px);
+        }
+        
+        .judul{
+            padding-bottom: 50px;
+            font-size: min(10vw,10vh);
+            
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+
+        }
+        
+        .destinasi .judul{
+            display: block;
+            padding-top: 10vh;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 100px;
+            font-size: min(10vw,10vh);
+            max-width: 95vw;
+            
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+
+        }
+        .lokasi{
+            display: flex;
+            margin-bottom: 100px;
+            gap: 25px;
+            align-items: center;
+        }
+        .lokasi .teks{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .lokasi .nama{
+            text-align: center;
+            font-size: min(4vw,4vh);
+            margin-bottom: 10px;
+        }
+        .lokasi .deskripsi{
+            text-align: justify;
+            overflow: hidden;
+            transition: height 0.5s ease-in-out;
+            height: auto;
+            color:var(--secCol);
+        }
+        .lokasi .fotoLokasi{
+            aspect-ratio: 1/1;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border:5px solid var(--secCol);;
+            border-radius:100%;
+        }
+
+        .transisiDestinasiArmada path{
+            /* dari destianasi */
+            fill:var(--mainColAnl) ;
+        }
+        .transisiDestinasiArmada path.back{
+            opacity: 0.5;
+        }
+        .transisiDestinasiArmada{
+            /* dari armada */
+            background-color: var(--secCol); 
+            margin: -10px;
+            padding: 0;
+            border: 0;
+        }
+
+        .armada.section {
+            background-color: var(--secCol);
+            
+        }
+        .armada .judul{
+            width: 100vw;
+        }
+        .armada .foto{
+            position: relative;
+            left: 50%;
+            transform: translate(-50%,0);
+            display: flex;
+            justify-content: center;
+            width: min(100vw,100vh);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .fotoArmada{
+            display: block;
+            border: 15px solid white;
+            border-width: 15px 15px 30px 15px;
+            width: 150px;
+        }
+
+
+        .team.section{
+            background-color: #112;
+            color:white;
+            overflow: hidden;
+            --memberPhotoSize:100px;
+        }
+        .memberContainer{
+            display: flex;
+            gap: 200px;
+        }
+        .team .member{
+            display: flex;
+            flex-direction: column;
+        }
+        .team .member .photo{
+            width:var(--memberPhotoSize);
+            border-radius: 100%;
+        }
+        .team .member .name{
+            text-align: center;
+            font-weight: bold;
+            width:var(--memberPhotoSize);
+        }
+
+
+
+        .dekorasi{
+            position: relative;
+            margin: auto;
+            width: 0px;
+            height: 0px;
+            overflow: visible;
+            background-color: black;
+        }
+        
+        .title.screen .dekorasi img{
+            position: absolute;
+            transform: translate(-50%,-50%);
+        }
+        .title.screen .dekorasi #spring1{
+            margin-left: 35vw;
+            margin-top: 5vh;
+            width: 10vw;
+        }
+        .title.screen .dekorasi #spring2{
+            margin-left: -35vw;
+            margin-top: 14vh;
+            width: 7vw;
+        }
+        .title.screen .dekorasi #zigzag1{
+            margin-left: -55vw;
+            margin-top: 38vh;
+            width: 20vw;
+        }
+        .title.screen .dekorasi #zigzag2{
+            margin-left: 35vw;
+            margin-top: 9vh;
+            width: 7vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar"></div>
+    <div class="navbar spacer"></div>
+    <div id="menuUtama" class="title screen">
+        <div class="dekorasi">
+            <!-- <img src="assets/deco/spring.svg" alt="" class="parallax" id="spring1" parralax-depth="-3"> -->
+            <!-- <img src="assets/deco/spring.svg" alt="" class="parallax" id="spring2" parralax-depth="-2">  -->
+            <!-- <img src="assets/deco/zigzag.png" alt="" class="parallax" id="zigzag1" parralax-depth="-1"> -->
+            <!-- <img src="assets/deco/zigzag.png" alt="" class="parallax" id="zigzag2" parralax-depth="-5"> -->
+        </div>
+        <div class="content">
+            <img class="slogan" src="assets/title/judul.png" alt="REKREASI SAMBIL BELAJAR" >
+            <div class="subjudul">Tur ke 4 destinasi menarik dan edukatif di Bandung</div>
+            <svg class="semicircle" viewBox="0 0 200 100">
+                <!-- <circle class="semicircle" r="100" cx="50" cy="100"></circle> -->
+                <path class="wave"
+                    d=" M -115 100
+                        q 100 0 130 -50
+                        q 30 -50 85 -50
+                        q 55 0 85 50
+                        q 30 50 100 50">
+
+            </svg>
+            <img src="assets/title/people.png" alt="" class="twoPeople" id="twoPeople">
+        </div>
+    </div>
+    <div class="destinasi section">
+        <div class="sectionContent">
+            <div class="judul">DESTINASI</div>
+            <div class="lokasi">
+                <div class="teks">
+                    <div class="nama">GEDUNG SATE</div>
+                    <div class="deskripsi">
+                        Gedung Sate yang pada masa Hindia Belanda dibangun sebagai kantor Departemen Badan Usaha Milik Negara Hindia Belanda (Belanda: Department van Gouvernementsbedrijven), peletakan batu pertama dilakukan oleh Johanna Catherina Coops, puteri sulung walikota Bandung, Bertus Coops dan Petronella Roelofsen, mewakili Gubernur Jenderal di Batavia, J.P. Graaf van Limburg Stirum pada tanggal 27 Juli 1920.
+                    </div>
+                </div>
+                <img class="fotoLokasi" src="assets/dest_Sate.jpg">
+            </div>
+            <div class="lokasi">
+                <div class="teks">
+                    <div class="nama">MUSEUM GEOLOGI</div>
+                    <div class="deskripsi">
+                        Museum Geologi didirikan pada tanggal 16 Mei 1929. Di museum ini, tersimpan dan mengelola berbagai materi geologi, seperti fosil, batuan, dan mineral. Semua materi tersebut dikumpulkan selama kerja lapangan di Indonesia sejak tahun 1850.
+                    </div>
+                </div>
+                <img class="fotoLokasi" src="assets/dest_geologi.png">
+            </div>
+            <div class="lokasi">
+                <div class="teks">
+                    <div class="nama">GEDUNG MERDEKA</div>
+                    <div class="deskripsi">
+                        Gedung Merdeka adalah gedung bersejarah yang pernah digunakan sebagai tempat Konferensi Tingkat Tinggi Asia-Afrika tahun 1955. Kini gedung ini digunakan sebagai museum yang memamerkan berbagai benda koleksi dan foto Konferensi Asia-Afrika yang merupakan cikal bakal Gerakan Non-Blok pertama yang pernah digelar di sini tahun 1955.
+                    </div>
+                </div>
+                <img class="fotoLokasi" src="assets/dest_Merdeka.jpg">
+            </div>
+            <div class="lokasi">
+                <div class="teks">
+                    <div class="nama">PT DIRGANTARA</div>
+                    <div class="deskripsi">
+                        PT Dirgantara Indonesia (atau biasa disingkat menjadi PTDI) adalah produsen pesawat terbang pertama dan satu-satunya di Indonesia dan di wilayah Asia Tenggara. Dirgantara Indonesia tidak hanya memproduksi berbagai jenis pesawat terbang, tetapi juga memproduksi helikopter dan senjata, serta menyediakan pelatihan dan pemeliharaan untuk mesin-mesin pesawat.
+                    </div>
+                </div>
+                <img class="fotoLokasi" src="assets/dest_PTDI.jpg">
+            </div>
+        </div>
+    </div> 
+    <!-- <svg id="wave" class="transisiDestinasiArmada" style="transform:rotate(180deg); transition: 0.3s" viewBox="0 0 1440 490" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(39.819, 77.393, 76.181, 1)" offset="0%"></stop><stop stop-color="rgba(67, 129, 127, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)" d="M0,245L26.7,245C53.3,245,107,245,160,228.7C213.3,212,267,180,320,171.5C373.3,163,427,180,480,204.2C533.3,229,587,261,640,302.2C693.3,343,747,392,800,400.2C853.3,408,907,376,960,343C1013.3,310,1067,278,1120,261.3C1173.3,245,1227,245,1280,245C1333.3,245,1387,245,1440,253.2C1493.3,261,1547,278,1600,294C1653.3,310,1707,327,1760,351.2C1813.3,376,1867,408,1920,359.3C1973.3,310,2027,180,2080,114.3C2133.3,49,2187,49,2240,106.2C2293.3,163,2347,278,2400,326.7C2453.3,376,2507,359,2560,294C2613.3,229,2667,114,2720,106.2C2773.3,98,2827,196,2880,204.2C2933.3,212,2987,131,3040,147C3093.3,163,3147,278,3200,302.2C3253.3,327,3307,261,3360,245C3413.3,229,3467,261,3520,302.2C3573.3,343,3627,392,3680,375.7C3733.3,359,3787,278,3813,236.8L3840,196L3840,490L3813.3,490C3786.7,490,3733,490,3680,490C3626.7,490,3573,490,3520,490C3466.7,490,3413,490,3360,490C3306.7,490,3253,490,3200,490C3146.7,490,3093,490,3040,490C2986.7,490,2933,490,2880,490C2826.7,490,2773,490,2720,490C2666.7,490,2613,490,2560,490C2506.7,490,2453,490,2400,490C2346.7,490,2293,490,2240,490C2186.7,490,2133,490,2080,490C2026.7,490,1973,490,1920,490C1866.7,490,1813,490,1760,490C1706.7,490,1653,490,1600,490C1546.7,490,1493,490,1440,490C1386.7,490,1333,490,1280,490C1226.7,490,1173,490,1120,490C1066.7,490,1013,490,960,490C906.7,490,853,490,800,490C746.7,490,693,490,640,490C586.7,490,533,490,480,490C426.7,490,373,490,320,490C266.7,490,213,490,160,490C106.7,490,53,490,27,490L0,490Z"></path><defs><linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(54.206, 97.886, 96.477, 1)" offset="0%"></stop><stop stop-color="rgba(67, 129, 127, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 50px); opacity:0.9" fill="url(#sw-gradient-1)" d="M0,147L26.7,130.7C53.3,114,107,82,160,106.2C213.3,131,267,212,320,245C373.3,278,427,261,480,253.2C533.3,245,587,245,640,228.7C693.3,212,747,180,800,196C853.3,212,907,278,960,285.8C1013.3,294,1067,245,1120,204.2C1173.3,163,1227,131,1280,130.7C1333.3,131,1387,163,1440,187.8C1493.3,212,1547,229,1600,253.2C1653.3,278,1707,310,1760,318.5C1813.3,327,1867,310,1920,326.7C1973.3,343,2027,392,2080,400.2C2133.3,408,2187,376,2240,310.3C2293.3,245,2347,147,2400,114.3C2453.3,82,2507,114,2560,179.7C2613.3,245,2667,343,2720,351.2C2773.3,359,2827,278,2880,261.3C2933.3,245,2987,294,3040,277.7C3093.3,261,3147,180,3200,171.5C3253.3,163,3307,229,3360,277.7C3413.3,327,3467,359,3520,383.8C3573.3,408,3627,425,3680,375.7C3733.3,327,3787,212,3813,155.2L3840,98L3840,490L3813.3,490C3786.7,490,3733,490,3680,490C3626.7,490,3573,490,3520,490C3466.7,490,3413,490,3360,490C3306.7,490,3253,490,3200,490C3146.7,490,3093,490,3040,490C2986.7,490,2933,490,2880,490C2826.7,490,2773,490,2720,490C2666.7,490,2613,490,2560,490C2506.7,490,2453,490,2400,490C2346.7,490,2293,490,2240,490C2186.7,490,2133,490,2080,490C2026.7,490,1973,490,1920,490C1866.7,490,1813,490,1760,490C1706.7,490,1653,490,1600,490C1546.7,490,1493,490,1440,490C1386.7,490,1333,490,1280,490C1226.7,490,1173,490,1120,490C1066.7,490,1013,490,960,490C906.7,490,853,490,800,490C746.7,490,693,490,640,490C586.7,490,533,490,480,490C426.7,490,373,490,320,490C266.7,490,213,490,160,490C106.7,490,53,490,27,490L0,490Z"></path><defs><linearGradient id="sw-gradient-2" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(40.499, 79.67, 78.406, 1)" offset="0%"></stop><stop stop-color="rgba(67, 129, 127, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 100px); opacity:0.8" fill="url(#sw-gradient-2)" d="M0,343L26.7,351.2C53.3,359,107,376,160,375.7C213.3,376,267,359,320,359.3C373.3,359,427,376,480,367.5C533.3,359,587,327,640,326.7C693.3,327,747,359,800,326.7C853.3,294,907,196,960,179.7C1013.3,163,1067,229,1120,236.8C1173.3,245,1227,196,1280,179.7C1333.3,163,1387,180,1440,204.2C1493.3,229,1547,261,1600,245C1653.3,229,1707,163,1760,122.5C1813.3,82,1867,65,1920,98C1973.3,131,2027,212,2080,277.7C2133.3,343,2187,392,2240,416.5C2293.3,441,2347,441,2400,416.5C2453.3,392,2507,343,2560,277.7C2613.3,212,2667,131,2720,98C2773.3,65,2827,82,2880,89.8C2933.3,98,2987,98,3040,106.2C3093.3,114,3147,131,3200,130.7C3253.3,131,3307,114,3360,163.3C3413.3,212,3467,327,3520,310.3C3573.3,294,3627,147,3680,147C3733.3,147,3787,294,3813,367.5L3840,441L3840,490L3813.3,490C3786.7,490,3733,490,3680,490C3626.7,490,3573,490,3520,490C3466.7,490,3413,490,3360,490C3306.7,490,3253,490,3200,490C3146.7,490,3093,490,3040,490C2986.7,490,2933,490,2880,490C2826.7,490,2773,490,2720,490C2666.7,490,2613,490,2560,490C2506.7,490,2453,490,2400,490C2346.7,490,2293,490,2240,490C2186.7,490,2133,490,2080,490C2026.7,490,1973,490,1920,490C1866.7,490,1813,490,1760,490C1706.7,490,1653,490,1600,490C1546.7,490,1493,490,1440,490C1386.7,490,1333,490,1280,490C1226.7,490,1173,490,1120,490C1066.7,490,1013,490,960,490C906.7,490,853,490,800,490C746.7,490,693,490,640,490C586.7,490,533,490,480,490C426.7,490,373,490,320,490C266.7,490,213,490,160,490C106.7,490,53,490,27,490L0,490Z"></path><defs><linearGradient id="sw-gradient-3" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(67, 129, 127, 1)" offset="0%"></stop><stop stop-color="rgba(67, 129, 127, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 150px); opacity:0.7" fill="url(#sw-gradient-3)" d="M0,147L26.7,196C53.3,245,107,343,160,326.7C213.3,310,267,180,320,155.2C373.3,131,427,212,480,269.5C533.3,327,587,359,640,351.2C693.3,343,747,294,800,285.8C853.3,278,907,310,960,343C1013.3,376,1067,408,1120,383.8C1173.3,359,1227,278,1280,228.7C1333.3,180,1387,163,1440,130.7C1493.3,98,1547,49,1600,81.7C1653.3,114,1707,229,1760,294C1813.3,359,1867,376,1920,367.5C1973.3,359,2027,327,2080,334.8C2133.3,343,2187,392,2240,375.7C2293.3,359,2347,278,2400,204.2C2453.3,131,2507,65,2560,106.2C2613.3,147,2667,294,2720,351.2C2773.3,408,2827,376,2880,302.2C2933.3,229,2987,114,3040,73.5C3093.3,33,3147,65,3200,106.2C3253.3,147,3307,196,3360,228.7C3413.3,261,3467,278,3520,294C3573.3,310,3627,327,3680,326.7C3733.3,327,3787,310,3813,302.2L3840,294L3840,490L3813.3,490C3786.7,490,3733,490,3680,490C3626.7,490,3573,490,3520,490C3466.7,490,3413,490,3360,490C3306.7,490,3253,490,3200,490C3146.7,490,3093,490,3040,490C2986.7,490,2933,490,2880,490C2826.7,490,2773,490,2720,490C2666.7,490,2613,490,2560,490C2506.7,490,2453,490,2400,490C2346.7,490,2293,490,2240,490C2186.7,490,2133,490,2080,490C2026.7,490,1973,490,1920,490C1866.7,490,1813,490,1760,490C1706.7,490,1653,490,1600,490C1546.7,490,1493,490,1440,490C1386.7,490,1333,490,1280,490C1226.7,490,1173,490,1120,490C1066.7,490,1013,490,960,490C906.7,490,853,490,800,490C746.7,490,693,490,640,490C586.7,490,533,490,480,490C426.7,490,373,490,320,490C266.7,490,213,490,160,490C106.7,490,53,490,27,490L0,490Z"></path></svg> -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="transisiDestinasiArmada">
+        <path class="front"  d="M0,256L48,218.7C96,181,192,107,288,85.3C384,64,480,96,576,101.3C672,107,768,85,864,80C960,75,1056,85,1152,117.3C1248,149,1344,203,1392,229.3L1440,256L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+        <path class="back"  d="M0,64L48,106.7C96,149,192,235,288,266.7C384,299,480,277,576,272C672,267,768,277,864,261.3C960,245,1056,203,1152,186.7C1248,171,1344,181,1392,186.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+    </svg>
+    <div class="armada section">
+        <div class="judul">ARMADA KAMI</div>
+        <div class="foto">
+            <img class="fotoArmada" src="assets/armada/WhatsApp Image 2024-05-23 at 00.07.16_1093ccdd.jpg">
+            <img class="fotoArmada" src="assets/armada/WhatsApp Image 2024-05-23 at 00.07.16_593fccf8.jpg">
+            <img class="fotoArmada" src="assets/armada/WhatsApp Image 2024-05-23 at 00.07.16_8e0109ca.jpg">
+        </div>
+    </div>
+    <div class="team section">
+        <div class="judul">TIM KAMI</div>
+        <marquee behavior="" direction="">
+            <div id="memberContainer" class="memberContainer">
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 1</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 2</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 3</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 4</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 5</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 13</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 22</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 13</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 43</div>
+                </div>
+                <div class="member">
+                    <img class="photo" src="assets/oramg placeholder.png" alt="">
+                    <div class="name">Anggota 54</div>
+                </div>
+            </div>
+        </marquee>
+    </div>
+</body>
+<script>
+    function updateParralaxPosition(){
+        const parallaxElements = document.querySelectorAll('.parallax');
+        parallaxElements.forEach(function(element) {
+            // if(!element.hasAttribute("initialPosition")){
+            //     element.setAttribute("initialPosition", element.getBoundingClientRect().y);
+            // }
+            // let initialPosition = parseInt(element.getAttribute("initialPosition"));
+            let depth = parseInt(element.getAttribute("parralax-depth"));
+            let scrollSpeed = 1/depth;
+            let offset = window.pageYOffset;
+            element.style.transform = "translate(0px, "+(offset*scrollSpeed) + 'px)';
+        });
+    }
+    updateParralaxPosition()
+
+    
+    function updateDeskripsiHeight(){
+        const deskripsiLokasi = document.querySelectorAll('.lokasi .deskripsi');
+        deskripsiLokasi.forEach(function(deskripsi) {
+            if(!deskripsi.hasAttribute("initialHeight")){
+                deskripsi.setAttribute("initialHeight", deskripsi.getBoundingClientRect().height);
+            }
+            let initialHeight = parseInt(deskripsi.getAttribute("initialHeight"));
+            let screenHeight = window.innerHeight;
+            let deskripsiYPos = deskripsi.getBoundingClientRect().y;
+            // if(deskripsiYPos < screenHeight*4/5){
+            // if(deskripsiYPos < screenHeight-initialHeight){
+            if(deskripsiYPos > screenHeight*1/3 && deskripsiYPos < screenHeight*2/3){
+                deskripsi.setAttribute("expanded","");
+                deskripsi.style.height = initialHeight+"px";
+            }else{
+                deskripsi.removeAttribute("expanded");
+                if(!deskripsi.hasAttribute("hovered")){
+                    deskripsi.style.height = "0px";
+                }
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateParralaxPosition);
+    window.addEventListener('scroll', updateDeskripsiHeight);
+
+
+
+    const semuaLokasi = document.querySelectorAll('.lokasi');
+    semuaLokasi.forEach(function(lokasi) {
+        lokasi.addEventListener('mouseover', ()=>{
+            let deskripsi = lokasi.querySelector('.deskripsi');
+            deskripsi.setAttribute("hovered","");
+            
+            let initialHeight = parseInt(deskripsi.getAttribute("initialHeight"));
+            deskripsi.style.height = initialHeight+"px";
+        });
+        lokasi.addEventListener('mouseleave', ()=>{
+            let deskripsi = lokasi.querySelector('.deskripsi');
+            deskripsi.removeAttribute("hovered");
+            if(!deskripsi.hasAttribute("expanded")){
+                deskripsi.style.height = "0px";
+            }
+        });
+    });
+</script>
+</html>
