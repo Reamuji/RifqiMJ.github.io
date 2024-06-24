@@ -8,7 +8,7 @@
 <body>
     <div>kode referal kamu :<span id="displayKodeReferal"></span></div>
     <div>alur :<span id="alur"></span></div>
-    buat kode turunan
+    <br>buat kode turunan
     <input type="text" name="" id="nama" placeholder="nama">
     <input type="text" name="" id="telp" placeholder="telpon">
     <button id="tombolBuat">Buat</button>
@@ -140,7 +140,8 @@
         console.log(alur);
         console.log(splittedReferal[i]);
         console.log(splittedReferal[i + 1]);
-        alur += `orang ke-${i} : ${B62ToText(splittedReferal[i])}-${B62ToTelp(splittedReferal[i + 1])}`;
+        alur += `orang ke-${i/2 + 1} : ${B62ToText(splittedReferal[i])}-${B62ToTelp(splittedReferal[i + 1])}
+`;
     }
 
     document.getElementById("displayKodeReferal").innerText = referal;
@@ -154,7 +155,7 @@
         newReferal += textToB62(nama)  + "-" + telpToB62(telp);
 
         document.getElementById("newReferal").innerText = newReferal
-        document.getElementById("newLink").innerText = `file:///D:/Project/Web/LandingPageArif/referalTest.html?referal=` + newReferal;
+        document.getElementById("newLink").innerText = window.location.href.split('?')[0] + "?referal=" + newReferal;
     })
 
 </script>
