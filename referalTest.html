@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referal Test</title>
+</head>
+<body>
+    <div>kode referal kamu :<span id="displayKodeReferal"></span></div>
+    <div>alur :<span id="alur"></span></div>
+    buat kode turunan
+    <input type="text" name="" id="nama" placeholder="nama">
+    <input type="text" name="" id="telp" placeholder="telpon">
+    <button id="tombolBuat">Buat</button>
+    <div> New Referal :<span id="newReferal"></span></div>
+    <div> New Link :<span id="newLink"></span></div>
+</body>
+<script>
+
+    function B10ToB62(numStr) {
+        const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let num = BigInt(numStr); // Convert string to BigInt
+        let result = '';
+
+        if (num === 0n) {
+            return chars[0];
+        }
+        while (num > 0n) {
+            result = chars[Number(num % 62n)] + result;
+            num = num / 62n;
+        }
+        return result;
+    }
+
+    function B62ToB10(str) {
+        const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const base = 62;
+        let result = 0n;
+        
+        for (let i = 0; i < str.length; i++) {
+            result = result * BigInt(base) + BigInt(chars.indexOf(str[i]));
+        }
+        
+        return result;
+    }
+
+    function B10ToText(numStr) {
+        const chars = '0abcdefghijklmnopqrstuvwxyz ';
+        let num = BigInt(numStr); // Convert string to BigInt
+        let result = '';
+
+        if (num === 0n) {
+            return chars[0];
+        }
+        while (num > 0n) {
+            result = chars[Number(num % 28n)] + result;
+            num = num / 28n;
+        }
+        return result;
+    }
+
+    function textToB10(str) {
+        const nonAlphabet = /[^a-z ]/g ;
+        str = str.toLowerCase().replace(nonAlphabet, '');
+        
+        const chars = '0abcdefghijklmnopqrstuvwxyz ';
+        const base = 28;
+        let result = 0n; // Use BigInt for large numbers
+
+        for (let i = 0; i < str.length; i++) {
+            result = result * BigInt(base) + BigInt(chars.indexOf(str[i]));
+        }
+
+        return result.toString();
+    }
+    
+
+    function B10ToTelp(numStr) {
+        const chars = 'x0123456789';
+        let num = BigInt(numStr); // Convert string to BigInt
+        let result = '';
+
+        if (num === 0n) {
+            return chars[0];
+        }
+        while (num > 0n) {
+            result = chars[Number(num % 11n)] + result;
+            num = num / 11n;
+        }
+        return result;
+    }
+
+    function telpToB10(str) {
+        const nonDigit = /[^0-9]/g ;
+        str = str.toLowerCase().replace(nonDigit, '');
+        
+        const chars = 'x0123456789';
+        const base = 11;
+        let result = 0n; // Use BigInt for large numbers
+
+        for (let i = 0; i < str.length; i++) {
+            result = result * BigInt(base) + BigInt(chars.indexOf(str[i]));
+        }
+
+        return result.toString();
+    }
+
+    const textToB62 = (str)=>B10ToB62(textToB10(str));
+    const B62ToText = (str)=>B10ToText(B62ToB10(str));
+    
+    const telpToB62 = (str)=>B10ToB62(telpToB10(str));
+    const B62ToTelp = (str)=>B10ToTelp(B62ToB10(str));
+
+    // Example usage:
+    let number = 125;
+    let base26String = B10ToText(number);
+    console.log(`Base 10: ${number} to Base 26: ${base26String}`); // Output: Base 10: 125 to Base 26: dv
+
+    let convertedBackNumber = textToB10(base26String);
+    // console.log(`Base 26: ${base26String} back to Base 10: ${convertedBackNumber}`); // Output: Base 26: dv back to Base 10: 125
+    // console.log((textToB10("Aib gays, terima kasih buat lo smeua ngentot, Gw masih stay disini anjeng")));
+    // console.log(B10ToText(textToB10("Aib gays, terima kasih buat lo smeua ngentot, Gw masih stay disini anjeng")));
+    // console.log((textToB62("Aib gays, terima kasih buat lo smeua ngentot, Gw masih stay disini anjeng")));
+    // console.log(B62ToText(textToB62("Aib gays, terima kasih buat lo smeua ngentot, Gw masih stay disini anjeng")));
+    // console.log((textToB62("Rifqi Maulana jati")));
+    // console.log(B62ToText(textToB62("Rifqi Maulana jati")));
+    // console.log((telpToB62("0896-7152-3634")));
+    // console.log(B62ToTelp(telpToB62("0896-7152-3634")));
+
+    
+    let params = new URLSearchParams(window.location.search);
+    let referal = params.get("referal");
+
+    let alur = `
+`;
+    let splittedReferal = referal.split("-")
+    console.log(splittedReferal);
+    console.log(alur);
+    for (let i = 0 ; i<splittedReferal.length ; i += 2){
+        console.log(alur);
+        console.log(splittedReferal[i]);
+        console.log(splittedReferal[i + 1]);
+        alur += `orang ke-${i} : ${B62ToText(splittedReferal[i])}-${B62ToTelp(splittedReferal[i + 1])}`;
+    }
+
+    document.getElementById("displayKodeReferal").innerText = referal;
+    document.getElementById("alur").innerText = alur;
+    
+    document.getElementById("tombolBuat").addEventListener("mousedown",()=>{
+        const nama = document.getElementById("nama").value
+        const telp = document.getElementById("telp").value
+
+        newReferal = referal ? referal + "-" : "";
+        newReferal += textToB62(nama)  + "-" + telpToB62(telp);
+
+        document.getElementById("newReferal").innerText = newReferal
+        document.getElementById("newLink").innerText = `file:///D:/Project/Web/LandingPageArif/referalTest.html?referal=` + newReferal;
+    })
+
+</script>
+</html>
