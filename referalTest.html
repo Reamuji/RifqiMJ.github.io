@@ -12,8 +12,9 @@
     <input type="text" name="" id="nama" placeholder="nama">
     <input type="text" name="" id="telp" placeholder="telpon">
     <button id="tombolBuat">Buat</button>
-    <div> New Referal :<span id="newReferal"></span></div>
-    <div> New Link :<span id="newLink"></span></div>
+    <div> New Referal : <span id="newReferal"></span></div>
+    <div> New Link : <span id="newLink"></span></div>
+    <button id="tombolKontak">Hubungi kami</button>
 </body>
 <script>
 
@@ -133,7 +134,7 @@
 
     let alur = `
 `;
-    let splittedReferal = referal.split("-")
+    let splittedReferal = referal?referal.split("-"):[]
     console.log(splittedReferal);
     console.log(alur);
     for (let i = 0 ; i<splittedReferal.length ; i += 2){
@@ -158,5 +159,12 @@
         document.getElementById("newLink").innerText = window.location.href.split('?')[0] + "?referal=" + newReferal;
     })
 
+    document.getElementById("tombolKontak").addEventListener("mousedown",()=>{
+        let templatePesan = "something something" + (referal?" kode referal saya : " + referal:"");
+        window.location.href="https://wa.me/6282215284240?text=" + encodeURIComponent(templatePesan);
+        // console.log("https://wa.me/6282215284240?text=" + encodeURIComponent(templatePesan))
+    })
+
+    
 </script>
 </html>
